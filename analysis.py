@@ -5,12 +5,14 @@
 from fileinput import filename
 import numpy as np
 import pandas as pd
+from regex import F
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 # perform data analysis using (pandas) buit in statistical data
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/ 
 # output summary data in text file (pandas)
+# https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
     # summary of each variable
 # output data in visual formats using Matplotlib / Seaborn
     # histogram of each variable
@@ -24,10 +26,34 @@ import matplotlib.pyplot as plt
 filename = 'iris.data'
 df = pd.read_csv(filename, names = ["sepal_length", "sepal_width", "petal_length", "petal_width", "species"])
 
-print(df.head(5))
-print(df.tail(5))
+
+# https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
+f = open("summary.txt", "a")
+#print(df.head(5), file=f)
+#print(df.tail(5), file=f)
+#print(df.columns, file=f)
+#https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html
+
+print(df["sepal_length"].describe(), file=f)
+print(df["sepal_width"].describe(), file=f)
+print(df["petal_length"].describe(), file=f)
+print(df["petal_width"].describe(), file=f)
+print(df[["sepal_length","species"]].groupby("species").describe(), file=f)
+print(df[["sepal_width","species"]].groupby("species").describe(), file=f)
+print(df[["petal_length","species"]].groupby("species").describe(), file=f)
+print(df[["petal_width","species"]].groupby("species").describe(), file=f)
+
+f.close()
 
 
+# Summary of each variable 
+'''
+print(df["sepal_length"].describe(), file=f)
+print(df["sepal_width"].describe(), file=f)
+print(df["petal_length"].describe(), file=f)
+print(df["petal_width"].describe(), file=f)
+
+'''
 
 
 #a_dataframe = df.head(5)
