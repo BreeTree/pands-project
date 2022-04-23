@@ -2,6 +2,8 @@
 # Author: Breeda Herlihy
 
 # import relevant modules
+from fileinput import filename
+import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -19,8 +21,19 @@ import matplotlib.pyplot as plt
 
 
 # read in data from the file and create a dataframe
-filename = 'irisdata.csv'
-df = pd.read_csv(filename)
+filename = 'iris.data'
+df = pd.read_csv(filename, names = ["sepal_length", "sepal_width", "petal_length", "petal_width", "species"])
+
+print(df.head(5))
+print(df.tail(5))
+
+
+
+
+#a_dataframe = df.head(5)
+#numpy_array = a_dataframe.to_numpy()
+#np.savetxt("test_file.txt",numpy_array, fmt = "%s")
+#https://www.adamsmith.haus/python/answers/how-to-write-contents-of-a-dataframe-into-a-text-file-in-python
 # top 5 rows of df
 # print(df.head(5))
 # random sample of 10 rows
@@ -38,7 +51,7 @@ df = pd.read_csv(filename)
 # 
 # print(df["class"].value_counts())
 
-
+'''
 # Any other analyses
 # heatmap of variables
 iris = sns.load_dataset("iris")
@@ -50,7 +63,7 @@ sns.heatmap(iris.corr(),cmap = "YlGnBu", linecolor = 'white', linewidths = 1)
 g = sns.pairplot(df,hue="class")
 plt.show()
 
-''''
+
 filename = "iris.data"
 def readText():
  with open(filename,"r") as f:
@@ -65,4 +78,3 @@ print(irisCount)
 
 #References
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/
-
