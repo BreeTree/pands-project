@@ -5,7 +5,6 @@
 from fileinput import filename
 import numpy as np
 import pandas as pd
-from regex import F
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -26,14 +25,11 @@ import matplotlib.pyplot as plt
 filename = 'iris.data'
 df = pd.read_csv(filename, names = ["sepal_length", "sepal_width", "petal_length", "petal_width", "species"])
 
-
+# Summary of each variable 
 # https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
 f = open("summary.txt", "a")
-#print(df.head(5), file=f)
-#print(df.tail(5), file=f)
-#print(df.columns, file=f)
-#https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html
 
+#https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html
 print(df["sepal_length"].describe(), file=f)
 print(df["sepal_width"].describe(), file=f)
 print(df["petal_length"].describe(), file=f)
@@ -44,16 +40,9 @@ print(df[["petal_length","species"]].groupby("species").describe(), file=f)
 print(df[["petal_width","species"]].groupby("species").describe(), file=f)
 
 f.close()
-
-
-# Summary of each variable 
-'''
-print(df["sepal_length"].describe(), file=f)
-print(df["sepal_width"].describe(), file=f)
-print(df["petal_length"].describe(), file=f)
-print(df["petal_width"].describe(), file=f)
-
-'''
+#https://pandas.pydata.org/docs/user_guide/style.html# Table Visualisation - consider
+# https://pandas.pydata.org/docs/user_guide/basics.html#sorting sorting results
+# https://pandas.pydata.org/docs/user_guide/reshaping.html pivot tables
 
 
 #a_dataframe = df.head(5)
@@ -73,9 +62,11 @@ print(df["petal_width"].describe(), file=f)
 # use loc and iloc to display specific rows
 # print(df.iloc[2])
 # return data where the species matches the str
-# print(df.loc[df['class'] == "Iris-virginica"])
-# 
-# print(df["class"].value_counts())
+# print(df.loc[df['species'] == "Iris-virginica"])
+# print(df["species"].value_counts())
+
+
+
 
 '''
 # Any other analyses
@@ -88,18 +79,6 @@ sns.heatmap(iris.corr(),cmap = "YlGnBu", linecolor = 'white', linewidths = 1)
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/ 
 g = sns.pairplot(df,hue="class")
 plt.show()
-
-
-filename = "iris.data"
-def readText():
- with open(filename,"r") as f:
-    chapter = str(f.read())
-    return chapter
-# test it
-chapter = readText()
-
-irisCount= readText().count("Iris")
-print(irisCount)
 '''
 
 #References
