@@ -25,6 +25,13 @@ import matplotlib.pyplot as plt
 filename = 'iris.data'
 df = pd.read_csv(filename, names = ["sepal_length", "sepal_width", "petal_length", "petal_width", "species"])
 
+#plot histograms
+# https://realpython.com/python-histograms/
+df.hist(column="sepal_length", by="species", grid=True, bins=10, legend=True)
+df.hist(column="sepal_width", by="species", grid=True, bins=10, legend=True)
+df.hist(column="petal_length", by="species", grid=True, bins=10, legend=True)
+df.hist(column="petal_width", by="species", grid=True, bins=10, legend=True)
+'''
 # Summary of each variable 
 # https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
 f = open("summary.txt", "a")
@@ -43,6 +50,9 @@ f.close()
 #https://pandas.pydata.org/docs/user_guide/style.html# Table Visualisation - consider
 # https://pandas.pydata.org/docs/user_guide/basics.html#sorting sorting results
 # https://pandas.pydata.org/docs/user_guide/reshaping.html pivot tables
+
+'''
+
 
 
 #a_dataframe = df.head(5)
@@ -78,8 +88,9 @@ sns.heatmap(iris.corr(),cmap = "YlGnBu", linecolor = 'white', linewidths = 1)
 # https://seaborn.pydata.org/tutorial/axis_grids.html
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/ 
 g = sns.pairplot(df,hue="class")
-plt.show()
 '''
+
+plt.show()
 
 #References
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/
