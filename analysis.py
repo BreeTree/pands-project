@@ -25,12 +25,41 @@ import matplotlib.pyplot as plt
 filename = 'iris.data'
 df = pd.read_csv(filename, names = ["sepal_length", "sepal_width", "petal_length", "petal_width", "species"])
 
-#plot histograms
+# plot histograms
 # https://realpython.com/python-histograms/
+# https://stackoverflow.com/questions/6871201/plot-two-histograms-on-single-chart-with-matplotlib
+'''
+df['sepal_length'].hist(by=df['species'])
 df.hist(column="sepal_length", by="species", grid=True, bins=10, legend=True)
 df.hist(column="sepal_width", by="species", grid=True, bins=10, legend=True)
 df.hist(column="petal_length", by="species", grid=True, bins=10, legend=True)
 df.hist(column="petal_width", by="species", grid=True, bins=10, legend=True)
+'''
+iris_vi = df.loc[df['species'] == "Iris-virginica"]
+iris_se = df.loc[df['species'] == "Iris-secosa"]
+width = 0.5  # the width of the bars
+
+fig, ax = plt.subplots()
+rects1 = ax.bar(iris_vi, width, label='Iris-virginica')
+rects2 = ax.bar(iris_se, width, label='Iris-secosa')
+
+# Add some text for labels, title and custom x-axis tick labels, etc.
+ax.set_ylabel('count')
+ax.set_title('Petal Length by Species')
+
+ax.legend()
+
+ax.bar_label(rects1, padding=3)
+ax.bar_label(rects2, padding=3)
+
+fig.tight_layout()
+
+
+
+
+
+
+
 '''
 # Summary of each variable 
 # https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
@@ -41,6 +70,8 @@ print(df["sepal_length"].describe(), file=f)
 print(df["sepal_width"].describe(), file=f)
 print(df["petal_length"].describe(), file=f)
 print(df["petal_width"].describe(), file=f)
+print(/n)
+print(Variables grouped by Species)
 print(df[["sepal_length","species"]].groupby("species").describe(), file=f)
 print(df[["sepal_width","species"]].groupby("species").describe(), file=f)
 print(df[["petal_length","species"]].groupby("species").describe(), file=f)
