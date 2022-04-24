@@ -59,17 +59,19 @@ ax.bar_label(rects2, padding=3)
 fig.tight_layout()
 '''
 #seaborn histogram
-
+# https://stackoverflow.com/questions/36362624/how-to-plot-multiple-histograms-on-same-plot-with-seaborn
 plt.rc("grid", linestyle = "dotted", color = "gray", alpha = 0.7)
 plt.grid()
 ax = sns.histplot(data = df, x = "sepal_length", 
                          hue = "species", 
                          kde = True, 
-                         bins = 40,  # https://seaborn.pydata.org/generated/seaborn.histplot.html#seaborn.histplot
+                         bins = 25,  # https://seaborn.pydata.org/generated/seaborn.histplot.html#seaborn.histplot
                          element = "bars") 
-ax.set_xlabel("Sepal length / cm", fontsize = 10) 
+ax.set_xlabel("Sepal length / cm", fontsize = 10)
+#https://stackoverflow.com/questions/1388450/giving-graphs-a-subtitle-in-matplotlib 
 plt.title("Sepal length distribution of 3 Iris species", weight = "bold")
-#plt.savefig() 
+# https://www.geeksforgeeks.org/matplotlib-pyplot-savefig-in-python/
+#plt.savefig("histogram_sepal_length.png")
 plt.show()
 
 
