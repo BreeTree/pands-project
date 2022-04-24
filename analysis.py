@@ -2,6 +2,7 @@
 # Author: Breeda Herlihy
 
 # import relevant modules
+from enum import auto
 from fileinput import filename
 import numpy as np
 import pandas as pd
@@ -29,12 +30,15 @@ df = pd.read_csv(filename, names = ["sepal_length", "sepal_width", "petal_length
 # https://realpython.com/python-histograms/
 # https://stackoverflow.com/questions/6871201/plot-two-histograms-on-single-chart-with-matplotlib
 '''
+# pandas histogram
 df['sepal_length'].hist(by=df['species'])
 df.hist(column="sepal_length", by="species", grid=True, bins=10, legend=True)
 df.hist(column="sepal_width", by="species", grid=True, bins=10, legend=True)
 df.hist(column="petal_length", by="species", grid=True, bins=10, legend=True)
 df.hist(column="petal_width", by="species", grid=True, bins=10, legend=True)
 '''
+'''
+# matplotlib histogram cannot use objects
 iris_vi = df.loc[df['species'] == "Iris-virginica"]
 iris_se = df.loc[df['species'] == "Iris-secosa"]
 width = 0.5  # the width of the bars
@@ -53,10 +57,20 @@ ax.bar_label(rects1, padding=3)
 ax.bar_label(rects2, padding=3)
 
 fig.tight_layout()
+'''
+#seaborn histogram
 
-
-
-
+plt.rc("grid", linestyle = "dotted", color = "gray", alpha = 0.7)
+plt.grid()
+ax = sns.histplot(data = df, x = "sepal_length", 
+                         hue = "species", 
+                         kde = True, 
+                         bins = 40,  # https://seaborn.pydata.org/generated/seaborn.histplot.html#seaborn.histplot
+                         element = "bars") 
+ax.set_xlabel("Sepal length / cm", fontsize = 10) 
+plt.title("Sepal length distribution of 3 Iris species", weight = "bold")
+#plt.savefig() 
+plt.show()
 
 
 
@@ -121,7 +135,7 @@ sns.heatmap(iris.corr(),cmap = "YlGnBu", linecolor = 'white', linewidths = 1)
 g = sns.pairplot(df,hue="class")
 '''
 
-plt.show()
+#plt.show()
 
 #References
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/
