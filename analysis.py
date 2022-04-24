@@ -58,6 +58,8 @@ ax.bar_label(rects2, padding=3)
 
 fig.tight_layout()
 '''
+
+'''
 #seaborn histogram
 # https://stackoverflow.com/questions/36362624/how-to-plot-multiple-histograms-on-same-plot-with-seaborn
 plt.rc("grid", linestyle = "dotted", color = "gray", alpha = 0.7)
@@ -68,13 +70,25 @@ ax = sns.histplot(data = df, x = "sepal_length",
                          bins = 25,  # https://seaborn.pydata.org/generated/seaborn.histplot.html#seaborn.histplot
                          element = "bars") 
 ax.set_xlabel("Sepal length / cm", fontsize = 10)
-#https://stackoverflow.com/questions/1388450/giving-graphs-a-subtitle-in-matplotlib 
+# https://stackoverflow.com/questions/1388450/giving-graphs-a-subtitle-in-matplotlib 
 plt.title("Sepal length distribution of 3 Iris species", weight = "bold")
 # https://www.geeksforgeeks.org/matplotlib-pyplot-savefig-in-python/
-#plt.savefig("histogram_sepal_length.png")
+plt.savefig("histogram_sepal_length.png")
 plt.show()
+'''
+#seaborn scatter plots
+# https://www.geeksforgeeks.org/scatterplot-using-seaborn-in-python/
+sns.set(style='whitegrid')
+sns.scatterplot(x="sepal_length", y="sepal_width", hue="species", data=df)
+plt.title("Sepal length versus width for Iris species", weight = "bold")
+plt.xlabel("Sepal length / cm", fontsize=8)
+plt.ylabel("Sepal width / cm", fontsize=8)
+plt.savefig("scatterplot_sepal_length_v_width.png")
+#plt.show()
 
-
+#sns.scatterplot(x="petal_length", y="petal_width", hue="species", data=df)
+#plt.savefig("scatterplot_petal_length_v_width.png")
+#plt.show()
 
 '''
 # Summary of each variable 
@@ -94,7 +108,7 @@ print(df[["petal_length","species"]].groupby("species").describe(), file=f)
 print(df[["petal_width","species"]].groupby("species").describe(), file=f)
 
 f.close()
-#https://pandas.pydata.org/docs/user_guide/style.html# Table Visualisation - consider
+# https://pandas.pydata.org/docs/user_guide/style.html# Table Visualisation - consider
 # https://pandas.pydata.org/docs/user_guide/basics.html#sorting sorting results
 # https://pandas.pydata.org/docs/user_guide/reshaping.html pivot tables
 
