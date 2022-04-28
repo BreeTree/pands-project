@@ -2,9 +2,8 @@
 # Author: Breeda Herlihy
 
 # import relevant modules
-from enum import auto
+
 from fileinput import filename
-import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -100,12 +99,15 @@ print(df["sepal_length"].describe(), file=f)
 print(df["sepal_width"].describe(), file=f)
 print(df["petal_length"].describe(), file=f)
 print(df["petal_width"].describe(), file=f)
-print(/n)
-print(Variables grouped by Species)
+
+print("Variables grouped by Species", file=f)
 print(df[["sepal_length","species"]].groupby("species").describe(), file=f)
 print(df[["sepal_width","species"]].groupby("species").describe(), file=f)
 print(df[["petal_length","species"]].groupby("species").describe(), file=f)
 print(df[["petal_width","species"]].groupby("species").describe(), file=f)
+https://www.geeksforgeeks.org/how-to-create-a-correlation-matrix-using-pandas/#:~:text=variables%20are%20related.-,Pandas%20dataframe.,na%20values%20are%20automatically%20excluded.
+print("Correlation Matrix for Iris dataset variables", file=f)
+print(df.corr(), file=f)
 
 f.close()
 # https://pandas.pydata.org/docs/user_guide/style.html# Table Visualisation - consider
