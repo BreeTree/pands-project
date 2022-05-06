@@ -41,9 +41,8 @@ ax = sns.histplot(data = df, x = "sepal_length",
                          bins = 25,  # https://seaborn.pydata.org/generated/seaborn.histplot.html#seaborn.histplot
                          element = "bars") 
 ax.set_xlabel("Sepal length / cm", fontsize = 10)
-
 plt.title("Sepal length distribution of 3 Iris species", weight = "bold")
-# plt.savefig("histogram_sepal_length.png")
+plt.savefig("histogram_sepal_length.png")
 plt.show()
 
 plt.rc("grid", linestyle = "dotted", color = "gray", alpha = 0.7)
@@ -54,9 +53,8 @@ ax = sns.histplot(data = df, x = "sepal_width",
                          bins = 25,  # https://seaborn.pydata.org/generated/seaborn.histplot.html#seaborn.histplot
                          element = "bars") 
 ax.set_xlabel("Sepal width / cm", fontsize = 10)
-
-plt.title("Petal length distribution of 3 Iris species", weight = "bold")
-# plt.savefig("histogram_sepal_width.png")
+plt.title("Sepal width distribution of 3 Iris species", weight = "bold")
+plt.savefig("histogram_sepal_width.png")
 plt.show()
 
 plt.rc("grid", linestyle = "dotted", color = "gray", alpha = 0.7)
@@ -67,9 +65,8 @@ ax = sns.histplot(data = df, x = "petal_length",
                          bins = 25,  # https://seaborn.pydata.org/generated/seaborn.histplot.html#seaborn.histplot
                          element = "bars") 
 ax.set_xlabel("Petal length / cm", fontsize = 10)
-
 plt.title("Petal length distribution of 3 Iris species", weight = "bold")
-# plt.savefig("histogram_petal_length.png")
+plt.savefig("histogram_petal_length.png")
 plt.show()
 
 plt.rc("grid", linestyle = "dotted", color = "gray", alpha = 0.7)
@@ -81,7 +78,7 @@ ax = sns.histplot(data = df, x = "petal_width",
                          element = "bars") 
 ax.set_xlabel("Petal width / cm", fontsize = 10)
 plt.title("Petal width distribution of 3 Iris species", weight = "bold")
-# plt.savefig("histogram_petal_width.png")
+plt.savefig("histogram_petal_width.png")
 plt.show()
 
 # Scatter plots
@@ -93,9 +90,12 @@ plt.ylabel("Sepal width / cm", fontsize=8)
 plt.savefig("scatterplot_sepal_length_v_width.png")
 plt.show()
 
-#sns.scatterplot(x="petal_length", y="petal_width", hue="species", data=df)
-#plt.savefig("scatterplot_petal_length_v_width.png")
-#plt.show()
+sns.scatterplot(x="petal_length", y="petal_width", hue="species", data=df)
+plt.title("Petal length versus width for Iris species", weight = "bold")
+plt.xlabel("Petal length / cm", fontsize=8)
+plt.ylabel("Petal width / cm", fontsize=8)
+plt.savefig("scatterplot_petal_length_v_width.png")
+plt.show()
 
 
 '''
