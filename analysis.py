@@ -108,5 +108,10 @@ sns.heatmap(iris.corr(),cmap = "YlGnBu", linecolor = 'white', linewidths = 1)
 # https://seaborn.pydata.org/tutorial/axis_grids.html
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/ 
 g = sns.pairplot(df,hue="class")
+
+# Box plot 
+# sns.boxplot(x='petal_length', y='petal_width', data=df)
+# https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51
+
 '''
 
