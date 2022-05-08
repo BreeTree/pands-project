@@ -1,8 +1,8 @@
-# Program to analyse a dataset on Iris
+# Program to analyse the Iris flower dataset
 # Author: Breeda Herlihy
+# 2022-05-08
 
-# import relevant modules and libraries
-
+# Import relevant modules and libraries
 from fileinput import filename
 import pandas as pd
 import seaborn as sns
