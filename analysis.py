@@ -119,7 +119,7 @@ plt.show()
 ### Box plot for Iris data
 sns.set_theme(style="ticks", palette="pastel") # configure plot style
 sns.boxplot(data=df) # create box plot from dataframe
-plt.title("Box plot for varirables in Iris data set", weight = "bold") # Title for the plot
+plt.title("Box plot for variables in Iris data set", weight = "bold") # Title for the plot
 sns.despine(offset=10, trim=True) # removes top and right spines from the plot
 plt.savefig("boxplot_irisdataset.png") # save plot
 plt.show() # show plot

@@ -11,7 +11,7 @@ For this project, the data set is examined to review the data and to establish w
 
 This project uses the Fisher Iris flower dataset archived by the UC Irvine Machine Learning Repository and licensed for reuse through CC-BY. **[5]** The original dataset was found to have a number of errors and has been updated by Bezdek *et al*. **[6]** bezdekIris.data was the dataset used for this project. The data has 50 measurements related to petal and sepal size for each species and these are analysed and plotted using the Python programming language. 
 
-![Iris versicolor](Plots/320px-Iris_versicolor_3.jpg)
+![Iris versicolor](Plots/320px-Iris_versicolor_3.jpg)  
 *Iris versicolor* flower, commonly known as the blue flag Iris. Photo taken by [Danielle Langlois in July 2005](https://commons.wikimedia.org/wiki/File:Iris_versicolor_3.jpg), licenced [CC-BY-SA](https://creativecommons.org/licenses/by-sa/3.0/deed.en)
 
 ## How to use
@@ -56,7 +56,7 @@ print(df["sepal_length"].describe(), file=f)
 |75%|6.400000|
 |max|7.900000|
 
-Count is number of not empty values. mean is a average sepal length across the 3 species of Iris. std is the standard deviation from this mean. 25%, 50% and 75% are the lower, median and upper percentiles and indicate how many of the values are less than the given percentile. min and max give the minimum and maximum value respectively **[8]** 
+Count is the number of not empty values. mean is the average sepal length across the 3 species of Iris. std is the standard deviation from this mean. 25%, 50% and 75% are the lower, median and upper percentiles and indicate how many of the values are less than the given percentile. min and max give the minimum and maximum value respectively **[8]** 
 
 The standard deviation is a measure of the amount of variation from the mean of a set of data. The standard deviation is largest for the variable petal length. 
 
@@ -124,7 +124,7 @@ All final histograms generated from the program are stored in the Plots director
 
 
 ### Output scatterplots of each pair of variables
-Scatter plots are useful way for to visually examine data for relationships between variables**[20]**. They can be used to visually check for correlations between related variables**[21]**. 
+Scatter plots are useful way for to visually examine data for relationships between variables **[20]**. They can be used to visually check for correlations between related variables **[21]**. 
 
 ```
 sns.scatterplot(x="petal_length", y="petal_width", hue="species", data=df)
@@ -146,13 +146,25 @@ The scatterplot for petal length versus width shows correlation in the blobs. Ap
 
 ![Regression plot](Plots/regression_plot_petal_length_v_width.png)  
 
-### Box plot of Iris data
+### Box plot of Iris dataset
 Analysis of any dataset requires initial review of the data which can be acheived with pandas functions or graphically via box plots. Box plots show the distribution of data for a given variable, how symmetrical it is, how tightly grouped and plots outliers. **[]**
 
 ```
+sns.set_theme(style="ticks", palette="pastel") # configure plot style
+sns.boxplot(data=df) # create box plot from dataframe
+plt.title("Box plot for variables in Iris data set", weight = "bold") # Title for the plot
+sns.despine(offset=10, trim=True) # removes top and right spines from the plot
+plt.savefig("boxplot_irisdataset.png") # save plot
+plt.show() # show plot
+```
 
+![Box plot for variables in Iris data set](Plots/boxplot_irisdataset.png)
 
 ## Conclusion
+The analyses of the dataset 
+- shows that *Iris setosa* can be distinguished from *Iris versicolor* and *Iris virginica* on their petal width and length features in this dataset. In practice, however, petal length and width aren't considered sufficiently reliable on their own. **[4]**. There is sufficiently strong evidence to classify the three species separately based on this data alone. 
+- demonstrates a strong correlation between petal length and petal width. One commentator has made the point that this is due to allometric scaling where the size of petals corresponds to the growth of the plant as a whole. **[27]**
+- showed a high degree of variance in the petal length variable across the species, a uniform distribution in sepal length and outliers in sepal width. 
 
 
 Python and its associated libraries offer many possibilites for data analyses and visualisation. While this program looked at a small dataset as a demonstrator, there is great potential for using python for data visualization of much larger datasets in an efficient and hugely customisable way. The derivation of the visualisations is coded and as such is documented which makes them reproducible as necessary. 
@@ -185,4 +197,4 @@ Python and its associated libraries offer many possibilites for data analyses an
 **[24]** https://seaborn.pydata.org/generated/seaborn.set_theme.html  
 **[25]** https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51
 **[26]** https://seaborn.pydata.org/examples/grouped_boxplot.html  
-
+**[27]** https://armchairecology.blog/iris-dataset/ 
