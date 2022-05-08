@@ -18,15 +18,54 @@ The program is used to analyse the Iris data set, output data to a text file and
 ### Import additional modules and libraries
 Additional modules and libraries are imported to support [file output](https://docs.python.org/3/library/fileinput.html), [data analysis](https://pandas.pydata.org/), [plotting] (https://matplotlib.org/) and [data visualization](https://seaborn.pydata.org/) in Python. 
 
-'''
+```
 from fileinput import filename
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-'''
+```
 
-output data perform data analysis using (pandas) built in statistical data
-# https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/ 
+### Read in data to a dataframe
+Data from the bezdekIris.data file is read into a dataframe and each column is given a variable name. **[7]**
+```
+filename = 'bezdekIris.data'
+df = pd.read_csv(filename, names = ["sepal_length", "sepal_width", "petal_length", "petal_width", "species"])
+```
+
+### Data is analysed and output to a text file
+The [describe](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html) function in pandas, generates descriptive statistics for a dataframe. This was used to generate summary data for each variable, for example, here with sepal length across the 3 Iris species
+
+```
+print(df["sepal_length"].describe(), file=f)
+````
+
+  
+| Summary statistics for Sepal Length  | Value|
+| ------------- | ------------- |
+|count| 150.000000|
+|mean|5.843333|
+|std|0.828066|
+|min|4.300000|
+|25%|5.100000|
+|50%|5.800000|
+|75%|6.400000|
+|max|7.900000|
+
+Count is number of not empty values. mean is a average sepal length across the 3 species of Iris. std is the standard deviation from this mean. 25%, 50% and 75% are the lower, median and upper percentiles and indicate how many of the values are less than the given percentile. min and max give the minimum and maximum value respectively **[8]** 
+
+Given the range between minimum and maximum values for these variables, it may be more useful to group them by species. From the tables generated it becomes clear that the *Iris setosa* flowers are smaller than the other two species. 
+
+```
+print(df[["sepal_length","species"]].groupby("species").describe(), file=f)
+```
+
+| Species | count | mean |std | min | 25% | 50% | 75% | max |
+|---|---|---|---|---|---|---|---|---|
+|Iris-setosa|50.0 | 5.006 | 0.352490 | 4.3 | 4.800 | 5.0 | 5.2 | 5.8 |
+|Iris-versicolor |50.0 | 5.936 | 0.516171 | 4.9 | 5.600 | 5.9 | 6.3 | 7.0|
+|Iris-virginica | 50.0 | 6.588 | 0.635880 | 4.9 | 6.225 | 6.5 | 6.9 | 7.9|
+
+
 # output summary data in text file (pandas)
 # https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
     # summary of each variable
@@ -42,9 +81,7 @@ output data perform data analysis using (pandas) built in statistical data
 # https://medium.com/@siddhardhan23/data-visualization-in-python-a90ddb706b23 [Pair plot example, data visualisation, univariate, multivariate analysis]
 # https://www.sisense.com/blog/data-visualizations-in-python-and-r/
 
-### Read in data
 
-### Analyse each variable
 
 ### Output summary data to a text file
 # https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
@@ -85,6 +122,6 @@ Multivariate analysis of variables, pair plot of variable class (species)
 **[4]** Anderson, E. (1936). The Species Problem in Iris. Annals of the Missouri Botanical Garden, 23(3), 457–509. https://doi.org/10.2307/2394164  
 **[5]** Fisher, R.A.. (1988). Iris. UCI Machine Learning Repository. https://archive-beta.ics.uci.edu/ml/datasets/iris   
 **[6]** J. C. Bezdek, J. M. Keller, R. Krishnapuram, L. I. Kuncheva and N. R. Pal, "Will the real iris data please stand up?," in IEEE Transactions on Fuzzy Systems, vol. 7, no. 3, pp. 368-369, June 1999, doi: https://doi.org/10.1109/91.771092.  
-
-https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/
+**[7]** https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/
+**[8]** https://www.w3schools.com/python/pandas/ref_df_describe.asp
 

@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 filename = 'bezdekIris.data'
 df = pd.read_csv(filename, names = ["sepal_length", "sepal_width", "petal_length", "petal_width", "species"])
 
-'''
+
 # Outputs a summary of each variable to a single text file
 f = open("summary.txt", "a")
 
@@ -30,7 +30,7 @@ print(df[["petal_width","species"]].groupby("species").describe(), file=f)
 
 print("\nCorrelation Matrix for Iris dataset variables", file=f)
 print(df.corr(), file=f)
-'''
+
 
 # Saves a histogram of each variable to png files
 plt.rc("grid", linestyle = "dotted", color = "gray", alpha = 0.7)
