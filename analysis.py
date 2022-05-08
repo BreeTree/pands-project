@@ -106,21 +106,21 @@ plt.ylabel("Petal width / cm", fontsize=8)
 plt.savefig("scatterplot_petal_length_v_width.png")
 plt.show()
 
+## Any other analyses
+### Scatter plot with linear regression model
+sns.set_theme(style="whitegrid", palette="pastel") # configure plot style
+sns.regplot(x="petal_length", y="petal_width", data=df);
+plt.title(" Regression plot: Petal length versus width for Iris species", weight = "bold")
+plt.xlabel("Petal length / cm", fontsize=8)
+plt.ylabel("Petal width / cm", fontsize=8)
+plt.savefig("regression_plot_petal_length_v_width.png")
+plt.show()
 
-'''
-# Any other analyses
-# heatmap of variables
-iris = sns.load_dataset("iris")
-sns.heatmap(iris.corr(),cmap = "YlGnBu", linecolor = 'white', linewidths = 1)
-
-# Multivariate analysis of variables, pair plot of variable class (species)
-# https://seaborn.pydata.org/tutorial/axis_grids.html
-# https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/ 
-g = sns.pairplot(df,hue="class")
-
-# Box plot 
-# sns.boxplot(x='petal_length', y='petal_width', data=df)
-# https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51
-
-'''
+### Box plot for Iris data
+sns.set_theme(style="ticks", palette="pastel") # configure plot style
+sns.boxplot(data=df) # create box plot from dataframe
+plt.title("Box plot for varirables in Iris data set", weight = "bold") # Title for the plot
+sns.despine(offset=10, trim=True) # removes top and right spines from the plot
+plt.savefig("boxplot_irisdataset.png") # save plot
+plt.show() # show plot
 
