@@ -33,7 +33,7 @@ df = pd.read_csv(filename, names = ["sepal_length", "sepal_width", "petal_length
 ```
 
 ### Data is analysed and output to a text file
-The [describe](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html) function in pandas, generates descriptive statistics for a dataframe. This was used to generate summary data for each variable, for example, here with sepal length across the 3 Iris species
+The [pandas.DataFrame.describe](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html) function, generates descriptive statistics for a dataframe. This was used to generate summary data for each variable, for example, here with sepal length across the 3 Iris species
 
 ```
 print(df["sepal_length"].describe(), file=f)
@@ -53,7 +53,9 @@ print(df["sepal_length"].describe(), file=f)
 
 Count is number of not empty values. mean is a average sepal length across the 3 species of Iris. std is the standard deviation from this mean. 25%, 50% and 75% are the lower, median and upper percentiles and indicate how many of the values are less than the given percentile. min and max give the minimum and maximum value respectively **[8]** 
 
-Given the range between minimum and maximum values for these variables, it may be more useful to group them by species. From the tables generated it becomes clear that the *Iris setosa* flowers are smaller than the other two species. 
+The standard deviation is a measure of the amount of variation from the mean of a set of data. The standard deviation is largest for the variable petal length. 
+
+Given the range between minimum and maximum values for these variables, it may be more useful to group them by species.  **[9]** From the tables generated it becomes clear that the *Iris setosa* flowers are smaller than the other two species. 
 
 ```
 print(df[["sepal_length","species"]].groupby("species").describe(), file=f)
@@ -65,49 +67,85 @@ print(df[["sepal_length","species"]].groupby("species").describe(), file=f)
 |Iris-versicolor |50.0 | 5.936 | 0.516171 | 4.9 | 5.600 | 5.9 | 6.3 | 7.0|
 |Iris-virginica | 50.0 | 6.588 | 0.635880 | 4.9 | 6.225 | 6.5 | 6.9 | 7.9|
 
+The [pandas.DataFrame.corr](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html?msclkid=4d9617becefa11eca3e2b1621b9243d7) function generates a correlation matrix. **[10]**
 
-# output summary data in text file (pandas)
-# https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
-    # summary of each variable
+````
+print(df.corr(), file=f)
+````
+
+For this data set, there is strong correlation between petal width and petal length compared to a weak inverse correlation between sepal width and sepal length. There is also a strong correlation between sepal length and petal length. **[11]**
+  
+|---| sepal_length | sepal_width | petal_length | petal_width |
+|---|---|---|---|---|
+| sepal_length |1.000000 |-0.117570 | 0.871754 | 0.817941 |
+| sepal_width  |-0.117570 |1.000000 | -0.428440 |-0.366126 |
+| petal_length | 0.871754 |-0.428440 | 1.000000 | 0.962865 |
+| petal_width | 0.817941 |-0.366126 | 0.962865 |1.000000 |
+
+
+## Output summary data to a text file
+This summary analysis is output to a text file [summary.txt](Plots/summary.txt) **[12]** **[13]**
+
+```
+f = open("summary.txt", "a")
+
+```
+
+## Output data in visual formats using Matplotlib and Seaborn
+Matplotlib and Seaborn libraries are useful libraries for data visualization in Python. **[14]** **[15]** 
+
+### Output histograms of each variable
+It is often best to visualise a dataset for ease of comprehension. Histograms are plots which represent the distribution of values or the frequency of a value. In this program, histograms are created for each variable and grouped by species so that the species can be appraised against each other. A kernel density estimate is added to smooth the distribution of bars and display on the plot. **[16]**, **[17]**, **[18]**, **[19]**. With the histograms it is easy to observe that some variables are distinct across species. The petal length and petal width values for *Iris setosa* are discrete from those for *Iris versicolor* and *Iris virginica* whose values overlap. It is also obvious from the histogram that the values for *Iris setosa* don't have much variance.
+
+The final histograms are stored in the Plots directory.
+
+```
+plt.rc("grid", linestyle = "dotted", color = "gray", alpha = 0.7) # configure plot appearance, grids, dotted lines, colour of lines and transparency
+plt.grid() # set grid lines
+ax = sns.histplot(data = df, # take values from data frame
+                        x = "sepal_length", # set x-axis values
+                         hue = "species", # group by species to give multiple plots on one histogram
+                         kde = True, # include KDE analysis
+                         bins = 25,  # number of bins
+                         element = "bars") # style of histogram bins
+ax.set_xlabel("Sepal length / cm", fontsize = 10) # set x-axis label
+plt.title("Sepal length distribution of 3 Iris species", weight = "bold") # set plot title
+plt.savefig("histogram_sepal_length.png") # save plot
+plt.show()
+```
+
+### Output scatterplots of each pair of variables
+Scatter plots are useful way for to visually examine data for relationships between variables**[20]**. They can be used to visually check for correlations between related variables**[21]**. In this project, scatterplots were used to check for is a relationship between petal length versus petal width and sepal length versus sepal width. 
+
+The final scatterplots are stored in the Plots directory.
+
+```
+sns.scatterplot(x="petal_length", y="petal_width", hue="species", data=df)
+plt.title("Petal length versus width for Iris species", weight = "bold")
+plt.xlabel("Petal length / cm", fontsize=8)
+plt.ylabel("Petal width / cm", fontsize=8)
+plt.savefig("scatterplot_petal_length_v_width.png")
+plt.show()
+```
 
 
 
 
 
-# output data in visual formats using Matplotlib / Seaborn
-    # histogram of each variable
-    # scatter plot of each pair of variables
-    # any other analyses
+
+
 # https://medium.com/@siddhardhan23/data-visualization-in-python-a90ddb706b23 [Pair plot example, data visualisation, univariate, multivariate analysis]
 # https://www.sisense.com/blog/data-visualizations-in-python-and-r/
 
 
 
-### Output summary data to a text file
-# https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
-# https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html
-# correlation matrix https://www.geeksforgeeks.org/how-to-create-a-correlation-matrix-using-pandas/#:~:text=variables%20are%20related.-,Pandas%20dataframe.,na%20values%20are%20automatically%20excluded. 
-# https://stackoverflow.com/questions/2918362/writing-string-to-a-file-on-a-new-line-every-time
-
+# 
 # https://pandas.pydata.org/docs/user_guide/style.html# Table Visualisation - consider
 # https://pandas.pydata.org/docs/user_guide/basics.html#sorting sorting results
 # https://pandas.pydata.org/docs/user_guide/reshaping.html pivot tables
 
 
 
-### Output histograms
-# https://realpython.com/python-histograms/
-# https://stackoverflow.com/questions/6871201/plot-two-histograms-on-single-chart-with-matplotlib
-# seaborn histogram
-# https://stackoverflow.com/questions/36362624/how-to-plot-multiple-histograms-on-same-plot-with-seaborn
-# bin size https://seaborn.pydata.org/generated/seaborn.histplot.html#seaborn.histplot
-# graph subtitle https://stackoverflow.com/questions/1388450/giving-graphs-a-subtitle-in-matplotlib 
-# save the plots # https://www.geeksforgeeks.org/matplotlib-pyplot-savefig-in-python/ 
-
-
-### Output scatterplots
-# seaborn scatter plots
-# https://www.geeksforgeeks.org/scatterplot-using-seaborn-in-python/
 
 
 ### Any other analyses
@@ -124,4 +162,18 @@ Multivariate analysis of variables, pair plot of variable class (species)
 **[6]** J. C. Bezdek, J. M. Keller, R. Krishnapuram, L. I. Kuncheva and N. R. Pal, "Will the real iris data please stand up?," in IEEE Transactions on Fuzzy Systems, vol. 7, no. 3, pp. 368-369, June 1999, doi: https://doi.org/10.1109/91.771092.  
 **[7]** https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/
 **[8]** https://www.w3schools.com/python/pandas/ref_df_describe.asp
+**[9]** https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html
+**[10]** https://www.geeksforgeeks.org/how-to-create-a-correlation-matrix-using-pandas/#:~:text=variables%20are%20related.-,Pandas%20dataframe.,na%20values%20are%20automatically%20excluded.
+ **[11]** http://www.lac.inpe.br/~rafael.santos/Docs/CAP394/WholeStory-Iris.html#:~:text=The%20Iris%20Dataset%20contains%20four,model%20to%20classify%20the%20species.
+**[12]**  https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file 
+**[13]**https://stackoverflow.com/questions/2918362/writing-string-to-a-file-on-a-new-line-every-time
+**[14]** https://medium.com/@siddhardhan23/data-visualization-in-python-a90ddb706b23 
+**[15]** https://realpython.com/python-histograms/ **
+**[16]** https://stackoverflow.com/questions/36362624/how-to-plot-multiple-histograms-on-same-plot-with-seaborn
+**[17]** https://seaborn.pydata.org/generated/seaborn.histplot.html#seaborn.histplot
+**[18]** https://stackoverflow.com/questions/1388450/giving-graphs-a-subtitle-in-matplotlib 
+**[19]** https://www.geeksforgeeks.org/matplotlib-pyplot-savefig-in-python/ 
+**[20]** https://greenteapress.com/thinkstats2/html/thinkstats2008.html#sec70 
+**[21]** https://visme.co/blog/scatter-plot/
+
 
