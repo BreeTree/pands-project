@@ -22,7 +22,7 @@ The program analysis.py was created using the Python programming language in Vis
 The program is used to analyse the Iris data set, output data to a text file and generate plots. 
 
 ### Import additional modules and libraries
-Additional modules and libraries are imported to support [file output](https://docs.python.org/3/library/fileinput.html), [data analysis](https://pandas.pydata.org/), [plotting] (https://matplotlib.org/) and [data visualization](https://seaborn.pydata.org/) in Python. 
+Additional modules and libraries are imported to support [file output](https://docs.python.org/3/library/fileinput.html), [data analysis](https://pandas.pydata.org/), [plotting](https://matplotlib.org/) and [data visualization](https://seaborn.pydata.org/) in Python. 
 
 ```
 from fileinput import filename
@@ -147,7 +147,7 @@ The scatterplot for petal length versus width shows correlation in the blobs. Ap
 ![Regression plot](Plots/regression_plot_petal_length_v_width.png)  
 
 ### Box plot of Iris dataset
-Analysis of any dataset requires initial review of the data which can be acheived with pandas functions or graphically via box plots. Box plots show the distribution of data for a given variable, how symmetrical it is, how tightly grouped and plots outliers. **[]**
+Analysis of any dataset requires initial review of the data which can be acheived with pandas functions or graphically via box plots. Box plots show the distribution of data for a given variable, how symmetrical it is, how tightly grouped and plots outliers, **[25]**, **[26]**.
 
 ```
 sns.set_theme(style="ticks", palette="pastel") # configure plot style
@@ -162,7 +162,7 @@ plt.show() # show plot
 
 ## Conclusion
 The analyses of the dataset 
-- shows that *Iris setosa* can be distinguished from *Iris versicolor* and *Iris virginica* on their petal width and length features in this dataset. In practice, however, petal length and width aren't considered sufficiently reliable on their own. **[4]**. There is sufficiently strong evidence to classify the three species separately based on this data alone. 
+- shows that *Iris setosa* can be distinguished from *Iris versicolor* and *Iris virginica* on their petal width and length features in this dataset. In practice, however, petal length and width aren't considered sufficiently reliable on their own. **[4]**. There isn't sufficiently strong evidence in this dataset to classify the three species separately. 
 - demonstrates a strong correlation between petal length and petal width. One commentator has made the point that this is due to allometric scaling where the size of petals corresponds to the growth of the plant as a whole. **[27]**
 - showed a high degree of variance in the petal length variable across the species, a uniform distribution in sepal length and outliers in sepal width. 
 
@@ -195,6 +195,6 @@ Python and its associated libraries offer many possibilites for data analyses an
 **[22]** https://www.geeksforgeeks.org/scatterplot-using-seaborn-in-python/  
 **[23]** https://seaborn.pydata.org/tutorial/regression.html#regression-tutorial  
 **[24]** https://seaborn.pydata.org/generated/seaborn.set_theme.html  
-**[25]** https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51
+**[25]** https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51  
 **[26]** https://seaborn.pydata.org/examples/grouped_boxplot.html  
-**[27]** https://armchairecology.blog/iris-dataset/ 
+**[27]** https://armchairecology.blog/iris-dataset/   
